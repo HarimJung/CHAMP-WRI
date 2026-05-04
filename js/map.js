@@ -1,40 +1,43 @@
 /**
  * Interactive World Map — D3.js + TopoJSON
  * Renders country paths from world-atlas data
- * Colors endorsers teal, non-endorsers gray
- * Hover: neon-green + tooltip
+ * Colors endorsers teal, non-endorsers light gray
+ * Hover: neon-green + tooltip, subtle border reveal
  * Click: slide-in sidebar with country details
+ * Dot View: capital city dots on neutral base map
  */
 (function() {
   'use strict';
 
-  const COLORS = {
+  var COLORS = {
     endorser: '#207B6A',
-    nonEndorser: '#E5E7EB',
+    nonEndorser: '#F0F0F0',
     hover: '#DBFE0C',
     ocean: '#ffffff',
-    border: '#ffffff'
+    dotBase: '#F5F5F5'
   };
 
-  const mapContainer = document.getElementById('map-container');
-  const mapLoading = document.getElementById('map-loading');
-  const sidebar = document.getElementById('country-sidebar');
-  const tooltip = document.getElementById('map-tooltip');
-  const listViewBtn = document.getElementById('list-view-btn');
-  const mapViewBtn = document.getElementById('map-view-btn');
-  const mapView = document.getElementById('map-view');
-  const listView = document.getElementById('list-view');
-  const regionTabs = document.querySelectorAll('.region-tab');
+  var mapContainer = document.getElementById('map-container');
+  var mapLoading = document.getElementById('map-loading');
+  var sidebar = document.getElementById('country-sidebar');
+  var tooltip = document.getElementById('map-tooltip');
+  var listViewBtn = document.getElementById('list-view-btn');
+  var mapViewBtn = document.getElementById('map-view-btn');
+  var dotViewBtn = document.getElementById('dot-view-btn');
+  var mapView = document.getElementById('map-view');
+  var listView = document.getElementById('list-view');
+  var regionTabs = document.querySelectorAll('.region-tab');
 
   if (!mapContainer) return;
 
-  let currentRegion = 'All';
-  let svg, path, projection;
+  var currentRegion = 'All';
+  var currentView = 'map'; // 'map', 'dot', 'list'
+  var svg, path, projection;
 
   // Build the D3 map
   function initMap() {
-    const width = mapContainer.clientWidth;
-    const height = Math.min(width * 0.55, 600);
+    var width = mapContainer.clientWidth;
+    var height = Math.min(width * 0.55, 600);
 
     projection = d3.geoNaturalEarth1()
       .scale(width / 5.5)
@@ -64,7 +67,7 @@
       .then(function(world) {
         if (mapLoading) mapLoading.style.display = 'none';
 
-        const countries = topojson.feature(world, world.objects.countries);
+        var countries = topojson.feature(world, world.objects.countries);
 
         svg.selectAll('path.country')
           .data(countries.features)
@@ -80,8 +83,8 @@
           .attr('fill', function(d) {
             return endorserByNumeric[d.id] ? COLORS.endorser : COLORS.nonEndorser;
           })
-          .attr('stroke', COLORS.border)
-          .attr('stroke-width', 0.5)
+          .attr('stroke', 'none')
+          .attr('stroke-width', 0)
           .attr('tabindex', function(d) { return endorserByNumeric[d.id] ? '0' : '-1'; })
           .attr('role', function(d) { return endorserByNumeric[d.id] ? 'button' : 'presentation'; })
           .attr('aria-label', function(d) {
@@ -137,6 +140,9 @@
             .text('EU');
         }
 
+        // Build dot view layer
+        buildDotView();
+
         // Build list view table
         buildListView();
         applyRegionFilter();
@@ -156,7 +162,8 @@
 
     d3.select(this)
       .attr('fill', COLORS.hover)
-      .attr('stroke-width', 1.5);
+      .attr('stroke', '#163331')
+      .attr('stroke-width', 0.8);
 
     if (tooltip) {
       tooltip.textContent = endorser.name;
@@ -174,9 +181,16 @@
 
   function handleMouseLeave(event, d) {
     var endorser = endorserByNumeric[d.id];
+    var fillColor = COLORS.nonEndorser;
+    if (currentView === 'dot') {
+      fillColor = COLORS.dotBase;
+    } else if (endorser) {
+      fillColor = COLORS.endorser;
+    }
     d3.select(this)
-      .attr('fill', endorser ? COLORS.endorser : COLORS.nonEndorser)
-      .attr('stroke-width', 0.5);
+      .attr('fill', fillColor)
+      .attr('stroke', 'none')
+      .attr('stroke-width', 0);
 
     if (tooltip) {
       tooltip.classList.remove('is-visible');
@@ -187,6 +201,128 @@
     var endorser = endorserByNumeric[d.id];
     if (!endorser) return;
     openSidebar(endorser);
+  }
+
+  // Dot View
+  function buildDotView() {
+    var dotLayer = svg.append('g')
+      .attr('class', 'dot-layer')
+      .style('display', 'none');
+
+    champEndorsers.forEach(function(endorser) {
+      if (typeof endorser.capital_lat === 'undefined' || typeof endorser.capital_lng === 'undefined') return;
+      var coords = projection([endorser.capital_lng, endorser.capital_lat]);
+      if (!coords) return;
+
+      // Ring behind dot
+      dotLayer.append('circle')
+        .attr('class', 'dot-ring')
+        .attr('cx', coords[0])
+        .attr('cy', coords[1])
+        .attr('r', 7)
+        .attr('fill', 'none')
+        .attr('stroke', '#207B6A')
+        .attr('stroke-width', 1)
+        .attr('opacity', 0.2)
+        .attr('data-region', endorser.region);
+
+      // Main dot
+      dotLayer.append('circle')
+        .attr('class', 'dot-point')
+        .attr('cx', coords[0])
+        .attr('cy', coords[1])
+        .attr('r', 4)
+        .attr('fill', '#207B6A')
+        .attr('opacity', 0.85)
+        .attr('data-name', endorser.name)
+        .attr('data-region', endorser.region)
+        .style('cursor', 'pointer')
+        .on('mouseenter', function(event) {
+          d3.select(this).attr('r', 6).attr('fill', '#DBFE0C');
+          if (tooltip) {
+            tooltip.textContent = endorser.name;
+            tooltip.classList.add('is-visible');
+          }
+        })
+        .on('mousemove', function(event) {
+          if (tooltip && tooltip.classList.contains('is-visible')) {
+            var rect = mapContainer.getBoundingClientRect();
+            tooltip.style.left = (event.clientX - rect.left + 12) + 'px';
+            tooltip.style.top = (event.clientY - rect.top - 30) + 'px';
+          }
+        })
+        .on('mouseleave', function(event) {
+          d3.select(this).attr('r', 4).attr('fill', '#207B6A');
+          if (tooltip) {
+            tooltip.classList.remove('is-visible');
+          }
+        })
+        .on('click', function(event) {
+          openSidebar(endorser);
+        });
+    });
+  }
+
+  // View switching
+  function setView(view) {
+    currentView = view;
+    var allBtns = [mapViewBtn, dotViewBtn, listViewBtn];
+    allBtns.forEach(function(btn) {
+      if (btn) {
+        btn.classList.remove('is-active');
+        btn.setAttribute('aria-pressed', 'false');
+      }
+    });
+
+    if (view === 'map') {
+      mapView.style.display = 'block';
+      listView.style.display = 'none';
+      if (mapViewBtn) {
+        mapViewBtn.classList.add('is-active');
+        mapViewBtn.setAttribute('aria-pressed', 'true');
+      }
+      // Show country colors, hide dots
+      svg.selectAll('path.country').attr('fill', function(d) {
+        return endorserByNumeric[d.id] ? COLORS.endorser : COLORS.nonEndorser;
+      });
+      svg.select('.eu-badge').style('display', null);
+      svg.select('.dot-layer').style('display', 'none');
+      applyRegionFilter();
+    } else if (view === 'dot') {
+      mapView.style.display = 'block';
+      listView.style.display = 'none';
+      if (dotViewBtn) {
+        dotViewBtn.classList.add('is-active');
+        dotViewBtn.setAttribute('aria-pressed', 'true');
+      }
+      // All countries neutral, show dots
+      svg.selectAll('path.country')
+        .attr('fill', COLORS.dotBase)
+        .attr('opacity', 1)
+        .attr('pointer-events', 'none');
+      svg.select('.eu-badge').style('display', 'none');
+      svg.select('.dot-layer').style('display', null);
+      applyDotRegionFilter();
+    } else if (view === 'list') {
+      mapView.style.display = 'none';
+      listView.style.display = 'block';
+      if (listViewBtn) {
+        listViewBtn.classList.add('is-active');
+        listViewBtn.setAttribute('aria-pressed', 'true');
+      }
+    }
+  }
+
+  function applyDotRegionFilter() {
+    svg.selectAll('.dot-point, .dot-ring').each(function() {
+      var el = d3.select(this);
+      var region = el.attr('data-region');
+      if (currentRegion === 'All') {
+        el.style('display', null);
+      } else {
+        el.style('display', region === currentRegion ? null : 'none');
+      }
+    });
   }
 
   // Sidebar
@@ -309,7 +445,12 @@
       this.classList.add('is-active');
       this.setAttribute('aria-selected', 'true');
       currentRegion = this.dataset.region;
-      applyRegionFilter();
+      if (currentView === 'dot') {
+        applyDotRegionFilter();
+      } else {
+        applyRegionFilter();
+      }
+      updateListFilter();
     });
 
     tab.addEventListener('keydown', function(e) {
@@ -385,27 +526,15 @@
     });
   }
 
-  // Toggle map / list view
-  if (listViewBtn) {
-    listViewBtn.addEventListener('click', function() {
-      mapView.style.display = 'none';
-      listView.style.display = 'block';
-      listViewBtn.classList.add('is-active');
-      mapViewBtn.classList.remove('is-active');
-      listViewBtn.setAttribute('aria-pressed', 'true');
-      mapViewBtn.setAttribute('aria-pressed', 'false');
-    });
-  }
-
+  // Wire up view toggle buttons
   if (mapViewBtn) {
-    mapViewBtn.addEventListener('click', function() {
-      mapView.style.display = 'block';
-      listView.style.display = 'none';
-      mapViewBtn.classList.add('is-active');
-      listViewBtn.classList.remove('is-active');
-      mapViewBtn.setAttribute('aria-pressed', 'true');
-      listViewBtn.setAttribute('aria-pressed', 'false');
-    });
+    mapViewBtn.addEventListener('click', function() { setView('map'); });
+  }
+  if (dotViewBtn) {
+    dotViewBtn.addEventListener('click', function() { setView('dot'); });
+  }
+  if (listViewBtn) {
+    listViewBtn.addEventListener('click', function() { setView('list'); });
   }
 
   // Responsive resize
@@ -425,6 +554,22 @@
         if (euCoords) {
           svg.select('.eu-badge')
             .attr('transform', 'translate(' + euCoords[0] + ',' + (euCoords[1] - 15) + ')');
+        }
+        // Reposition dots
+        svg.selectAll('.dot-point, .dot-ring').each(function() {
+          var el = d3.select(this);
+          var name = el.attr('data-name');
+          if (!name) {
+            // ring — find matching point by position
+            return;
+          }
+        });
+        // Re-render dots by rebuilding
+        svg.select('.dot-layer').remove();
+        buildDotView();
+        if (currentView === 'dot') {
+          svg.select('.dot-layer').style('display', null);
+          applyDotRegionFilter();
         }
       }
     }, 250);

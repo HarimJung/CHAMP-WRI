@@ -74,8 +74,6 @@
       <!-- Decorative rings -->
       <div class="hero-decor" aria-hidden="true">
         <div class="hero-ring hero-ring-1"></div>
-        <div class="hero-ring hero-ring-2"></div>
-        <div class="hero-ring hero-ring-3"></div>
       </div>
 
       <div class="container hero-content">
@@ -110,10 +108,6 @@
         </div>
       </div>
 
-      <div class="hero-scroll-hint" aria-hidden="true">
-        <span>Scroll</span>
-        <div class="scroll-line"></div>
-      </div>
     </section>
 
     <!-- Interactive Map Section -->
@@ -138,6 +132,7 @@
         <div class="view-toggle fade-in stagger-3" style="display: flex; justify-content: center;">
           <div class="view-toggle-wrap">
             <button id="map-view-btn" class="view-toggle-btn is-active" aria-pressed="true">Map View</button>
+            <button id="dot-view-btn" class="view-toggle-btn" aria-pressed="false">Dot View</button>
             <button id="list-view-btn" class="view-toggle-btn" aria-pressed="false">List View</button>
           </div>
         </div>
@@ -154,7 +149,7 @@
               Endorsed
             </div>
             <div class="legend-item">
-              <span class="legend-swatch" style="background: #E5E7EB;" aria-hidden="true"></span>
+              <span class="legend-swatch" style="background: #F0F0F0;" aria-hidden="true"></span>
               Not Endorsed
             </div>
           </div>
@@ -189,22 +184,11 @@
             <a href="about.html" class="btn btn-secondary">Learn more about CHAMP &rarr;</a>
           </div>
           <div class="what-champ-image fade-in fade-right" aria-hidden="true">
-            <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="100" cy="100" r="90" stroke="#207B6A" stroke-width="2" fill="none"/>
-              <circle cx="100" cy="100" r="70" stroke="#207B6A" stroke-width="1.5" fill="none" stroke-dasharray="4 4"/>
-              <circle cx="100" cy="100" r="50" stroke="#207B6A" stroke-width="1" fill="none" stroke-dasharray="2 6"/>
-              <circle cx="60" cy="75" r="8" fill="#207B6A"/>
-              <circle cx="140" cy="85" r="6" fill="#207B6A"/>
-              <circle cx="100" cy="50" r="5" fill="#DBFE0C"/>
-              <circle cx="75" cy="130" r="7" fill="#207B6A"/>
-              <circle cx="130" cy="125" r="5" fill="#DBFE0C"/>
-              <circle cx="100" cy="100" r="10" fill="#207B6A"/>
-              <line x1="60" y1="75" x2="100" y2="100" stroke="#B4DFCE" stroke-width="1"/>
-              <line x1="140" y1="85" x2="100" y2="100" stroke="#B4DFCE" stroke-width="1"/>
-              <line x1="100" y1="50" x2="100" y2="100" stroke="#B4DFCE" stroke-width="1"/>
-              <line x1="75" y1="130" x2="100" y2="100" stroke="#B4DFCE" stroke-width="1"/>
-              <line x1="130" y1="125" x2="100" y2="100" stroke="#B4DFCE" stroke-width="1"/>
-            </svg>
+            <div class="champ-highlight-stat">
+              <span class="highlight-number">78</span>
+              <span class="highlight-unit">countries</span>
+              <span class="highlight-detail">united for multilevel<br>climate action</span>
+            </div>
           </div>
         </div>
       </div>
@@ -251,7 +235,7 @@
     <!-- Latest Resources -->
     <section class="latest-resources section" aria-label="Latest resources">
       <div class="container">
-        <span class="section-label fade-in" style="display:block;text-align:center;font-size:0.75rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--teal);margin-bottom:12px;">Knowledge Hub</span>
+        <span class="section-label fade-in">Knowledge Hub</span>
         <h2 class="fade-in stagger-1">Latest Resources</h2>
         <div class="resources-grid">
           <article class="card fade-in stagger-2">
@@ -355,5 +339,6 @@
   <script src="js/countries.js"></script>
   <script src="js/nav.js"></script>
   <script src="js/map.js"></script>
+  <script src="js/countup.js"></script>
 </body>
 </html>
