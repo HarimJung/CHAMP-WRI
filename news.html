@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>News &amp; Updates — CHAMP Coalition for Climate Action</title>
+  <meta name="description" content="Latest news and updates from the CHAMP coalition, including new endorsers, events, and multilevel climate action developments.">
+  <meta property="og:title" content="News & Updates — CHAMP Coalition for Climate Action">
+  <meta property="og:description" content="Stay updated on the latest CHAMP coalition news, new endorsers, and multilevel climate partnership developments.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='14' fill='%23207B6A'/><text x='16' y='21' text-anchor='middle' fill='%23DBFE0C' font-size='14' font-weight='bold' font-family='sans-serif'>C</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Barlow:ital,wght@0,400;0,600;0,700;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="grain-overlay" aria-hidden="true"></div>
+  <a href="news.html#main-content" class="skip-link">Skip to main content</a>
+
+  <header class="site-header">
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="index.html" class="nav-logo" aria-label="CHAMP home">CH<span>A</span>MP</a>
+      <button class="nav-hamburger" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle navigation menu">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-menu" id="nav-menu" role="menubar">
+        <a href="index.html" role="menuitem">Home</a>
+        <a href="index.html#map-section" role="menuitem">Map</a>
+        <a href="resources.html" role="menuitem">Resources</a>
+        <a href="events.html" role="menuitem">Events</a>
+        <a href="news.html" role="menuitem">News</a>
+        <a href="about.html" role="menuitem">About</a>
+        <a href="about.html#join" class="nav-cta" role="menuitem">Join CHAMP</a>
+      </div>
+    </nav>
+    <div class="nav-overlay"></div>
+  </header>
+
+  <main id="main-content">
+    <section class="page-header">
+      <div class="container">
+        <span class="page-label">Latest</span>
+        <h1>News &amp; Updates</h1>
+        <p>The latest from the CHAMP coalition and multilevel climate action community</p>
+      </div>
+    </section>
+
+    <section class="section" style="background: var(--surface-off);">
+      <div class="container">
+        <div id="news-grid" class="news-grid"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>About CHAMP</h4>
+          <p>The Coalition for High Ambition Multilevel Partnerships for Climate Action, launched at COP28, unites countries committed to multilevel climate governance.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="resources.html">Resources</a></li>
+            <li><a href="events.html">Events</a></li>
+            <li><a href="news.html">News</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="resources.html">CHAMP Pledge Document</a></li>
+            <li><a href="resources.html">Implementation Guidance</a></li>
+            <li><a href="resources.html">NDC Recommendations</a></li>
+            <li><a href="resources.html">Annual Reports</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <p>CHAMP Secretariat<br>World Resources Institute<br>10 G Street NE, Suite 800<br>Washington, DC 20002</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2025 CHAMP. All rights reserved.</span>
+        <span>Secretariat: <a href="https://www.wri.org" target="_blank" rel="noopener noreferrer">World Resources Institute</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/countries.js"></script>
+  <script src="js/nav.js"></script>
+  <script>
+  (function() {
+    'use strict';
+    var grid = document.getElementById('news-grid');
+    if (!grid) return;
+
+    sampleNews.forEach(function(item, index) {
+      var d = new Date(item.date);
+      var dateStr = d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
+      var card = document.createElement('article');
+      card.className = 'news-card card fade-in';
+      card.classList.add('stagger-' + Math.min(index + 1, 8));
+
+      card.innerHTML =
+        '<div class="card-body">' +
+          '<time class="card-date" datetime="' + item.date + '">' + dateStr + '</time>' +
+          '<h3 class="card-title">' + item.title + '</h3>' +
+          '<p class="card-text">' + item.excerpt + '</p>' +
+        '</div>' +
+        '<div class="card-footer">' +
+          '<a href="https://champ-prototype.vercel.app/'&#32;+&#32;item.url&#32;+&#32;'" class="btn btn-secondary btn-small">Read more &rarr;</a>' +
+        '</div>';
+
+      grid.appendChild(card);
+    });
+  })();
+  </script>
+</body>
+</html>
