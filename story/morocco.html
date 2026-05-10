@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Morocco: Connecting Cities to National Climate Goals — CHAMP Country Story</title>
+  <meta name="description" content="How Morocco is building multilevel partnerships to connect cities like Chefchaouen to national climate targets through the CHAMP coalition.">
+  <meta property="og:title" content="How Morocco Connects Cities to National Climate Goals — CHAMP">
+  <meta property="og:description" content="From Chefchaouen to Rabat — multilevel partnerships in action. A CHAMP country story.">
+  <meta property="og:type" content="article">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='14' fill='%23207B6A'/><text x='16' y='21' text-anchor='middle' fill='%23DBFE0C' font-size='14' font-weight='bold' font-family='sans-serif'>C</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Barlow:ital,wght@0,400;0,600;0,700;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+
+  <style>
+    /* =============================================
+       MOROCCO STORY — EDITORIAL STYLES
+       Self-contained. Only nav comes from styles.css
+       ============================================= */
+
+    /* --- Reset page-level styles from main CSS --- */
+    .story-page {
+      background: #FAFBFA;
+      color: #163331;
+      font-family: 'Barlow', sans-serif;
+      font-size: 20px;
+      line-height: 1.8;
+      overflow-x: hidden;
+    }
+
+    .story-page *,
+    .story-page *::before,
+    .story-page *::after {
+      box-sizing: border-box;
+    }
+
+    /* Hide the grain overlay from main site */
+    .grain-overlay { display: none; }
+
+    /* --- Prose column --- */
+    .story-prose {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* =========================================
+       HERO
+       ========================================= */
+    .story-hero {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      min-height: 600px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .story-hero__img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 40%;
+    }
+
+    .story-hero__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(22, 51, 49, 0) 0%,
+        rgba(22, 51, 49, 0.05) 30%,
+        rgba(22, 51, 49, 0.35) 55%,
+        rgba(22, 51, 49, 0.75) 80%,
+        rgba(22, 51, 49, 0.92) 100%
+      );
+    }
+
+    .story-hero__content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      padding: 0 24px 80px;
+      text-align: center;
+      color: #fff;
+    }
+
+    .story-hero__eyebrow {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.8125rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 20px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: heroFadeIn 0.8s 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .story-hero__headline {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(2.5rem, 6vw, 4.25rem);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      margin: 0 0 20px;
+      opacity: 0;
+      transform: translateY(24px);
+      animation: heroFadeIn 0.9s 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .story-hero__subline {
+      font-family: 'Barlow', sans-serif;
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      font-weight: 400;
+      line-height: 1.5;
+      color: rgba(255,255,255,0.75);
+      margin: 0;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: heroFadeIn 0.8s 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .story-hero__scroll-hint {
+      position: absolute;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      opacity: 0;
+      animation: heroFadeIn 0.6s 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .story-hero__scroll-hint span {
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+    }
+
+    .story-hero__scroll-line {
+      width: 1px;
+      height: 32px;
+      background: rgba(255,255,255,0.25);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .story-hero__scroll-line::after {
+      content: '';
+      position: absolute;
+      top: -100%;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255,255,255,0.7);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes heroFadeIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes scrollPulse {
+      0%   { top: -100%; }
+      50%  { top: 100%; }
+      100% { top: 100%; }
+    }
+
+    /* =========================================
+       INTRO SECTION
+       ========================================= */
+    .story-intro {
+      padding: 80px 24px 0;
+    }
+
+    .story-intro p {
+      max-width: 680px;
+      margin: 0 auto 28px;
+      font-size: 20px;
+      line-height: 1.8;
+      color: #163331;
+    }
+
+    .story-intro p:first-child::first-line {
+      font-weight: 600;
+    }
+
+    /* =========================================
+       FULL-WIDTH IMAGE BREAKOUT
+       ========================================= */
+    .story-breakout {
+      position: relative;
+      width: 100vw;
+      left: 50%;
+      transform: translateX(-50%);
+      margin: 80px 0;
+    }
+
+    .story-breakout__img {
+      width: 100%;
+      height: 56vw;
+      max-height: 620px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .story-breakout__caption {
+      max-width: 680px;
+      margin: 14px auto 0;
+      padding: 0 24px;
+      font-size: 0.8125rem;
+      line-height: 1.5;
+      color: #6b8280;
+    }
+
+    /* =========================================
+       SECTION HEADERS
+       ========================================= */
+    .story-section-header {
+      max-width: 680px;
+      margin: 0 auto 40px;
+      padding: 0 24px;
+    }
+
+    .story-section-header__rule {
+      width: 64px;
+      height: 3px;
+      background: #207B6A;
+      border: none;
+      margin: 0 0 28px;
+    }
+
+    .story-section-header h2 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 800;
+      line-height: 1.12;
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+      color: #163331;
+      margin: 0;
+    }
+
+    /* =========================================
+       BODY TEXT
+       ========================================= */
+    .story-body {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .story-body p {
+      margin: 0 0 28px;
+      font-size: 20px;
+      line-height: 1.8;
+      color: #163331;
+    }
+
+    /* =========================================
+       SECTION DIVIDER
+       ========================================= */
+    .story-divider {
+      width: 100%;
+      max-width: 680px;
+      margin: 80px auto;
+      padding: 0 24px;
+    }
+
+    .story-divider hr {
+      border: none;
+      height: 1px;
+      background: #207B6A;
+      opacity: 0.25;
+    }
+
+    /* =========================================
+       PULL QUOTE
+       ========================================= */
+    .story-pullquote {
+      max-width: 600px;
+      margin: 80px auto;
+      padding: 0 24px 0 28px;
+      border-left: 4px solid #207B6A;
+    }
+
+    .story-pullquote blockquote {
+      margin: 0;
+      padding: 0;
+    }
+
+    .story-pullquote blockquote p {
+      font-family: 'Barlow', sans-serif;
+      font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.4;
+      color: #163331;
+      margin: 0 0 16px;
+    }
+
+    .story-pullquote cite {
+      display: block;
+      font-style: normal;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: #207B6A;
+      letter-spacing: 0.02em;
+    }
+
+    /* =========================================
+       THREE STEPS CARDS
+       ========================================= */
+    .story-steps {
+      max-width: 900px;
+      margin: 0 auto 40px;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .story-step {
+      background: #fff;
+      border: 1px solid rgba(22, 51, 49, 0.08);
+      border-radius: 12px;
+      padding: 36px 28px 32px;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                  box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .story-step:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(22, 51, 49, 0.08);
+    }
+
+    .story-step__number {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.8125rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      color: #207B6A;
+      margin-bottom: 6px;
+    }
+
+    .story-step__title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.375rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      color: #163331;
+      margin: 0 0 14px;
+      line-height: 1.2;
+    }
+
+    .story-step p {
+      font-size: 0.9375rem;
+      line-height: 1.7;
+      color: #3d5654;
+      margin: 0;
+    }
+
+    /* =========================================
+       DATA CALLOUT CARDS
+       ========================================= */
+    .story-data-cards {
+      max-width: 900px;
+      margin: 80px auto;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .story-data-card {
+      background: #F2F4F3;
+      border-radius: 12px;
+      padding: 36px 24px 32px;
+      text-align: center;
+    }
+
+    .story-data-card__number {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 3rem);
+      font-weight: 800;
+      color: #207B6A;
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+
+    .story-data-card__label {
+      font-size: 0.875rem;
+      line-height: 1.5;
+      color: #6b8280;
+      max-width: 200px;
+      margin: 0 auto;
+    }
+
+    /* =========================================
+       RELATED CONTENT CARDS
+       ========================================= */
+    .story-related {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 24px 100px;
+    }
+
+    .story-related__header {
+      margin-bottom: 32px;
+    }
+
+    .story-related__header h2 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: #163331;
+      margin: 0;
+    }
+
+    .story-related__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .story-related-card {
+      display: flex;
+      flex-direction: column;
+      background: #fff;
+      border: 1px solid rgba(22, 51, 49, 0.08);
+      border-radius: 12px;
+      padding: 28px 24px 24px;
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                  box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                  border-color 0.3s ease;
+    }
+
+    .story-related-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(22, 51, 49, 0.08);
+      border-color: rgba(32, 123, 106, 0.25);
+    }
+
+    .story-related-card__source {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #207B6A;
+      margin-bottom: 10px;
+    }
+
+    .story-related-card__title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.125rem;
+      font-weight: 700;
+      line-height: 1.3;
+      color: #163331;
+      margin: 0 0 auto;
+      padding-bottom: 16px;
+    }
+
+    .story-related-card__arrow {
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: #207B6A;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .story-related-card__arrow svg {
+      transition: transform 0.25s ease;
+    }
+
+    .story-related-card:hover .story-related-card__arrow svg {
+      transform: translateX(4px);
+    }
+
+    /* =========================================
+       FOOTER CTA BAND
+       ========================================= */
+    .story-footer-cta {
+      background: #163331;
+      padding: 64px 24px;
+      text-align: center;
+    }
+
+    .story-footer-cta__inner {
+      max-width: 600px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .story-footer-cta a {
+      display: inline-block;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 14px 32px;
+      border-radius: 100px;
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                  background 0.25s ease,
+                  box-shadow 0.25s ease;
+    }
+
+    .story-footer-cta a:hover {
+      transform: translateY(-2px);
+    }
+
+    .story-footer-cta__primary {
+      background: #207B6A;
+      color: #fff;
+    }
+
+    .story-footer-cta__primary:hover {
+      background: #1a9a82;
+      box-shadow: 0 6px 20px rgba(32, 123, 106, 0.3);
+    }
+
+    .story-footer-cta__secondary {
+      background: transparent;
+      color: rgba(255,255,255,0.6);
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .story-footer-cta__secondary:hover {
+      color: #fff;
+      border-color: rgba(255,255,255,0.35);
+    }
+
+    /* =========================================
+       SCROLL REVEAL ANIMATION
+       ========================================= */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.is-revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Stagger children */
+    .reveal-stagger > .reveal:nth-child(1) { transition-delay: 0s; }
+    .reveal-stagger > .reveal:nth-child(2) { transition-delay: 0.1s; }
+    .reveal-stagger > .reveal:nth-child(3) { transition-delay: 0.2s; }
+
+    /* =========================================
+       RESPONSIVE
+       ========================================= */
+    @media (max-width: 768px) {
+      .story-hero__content {
+        padding-bottom: 100px;
+      }
+
+      .story-hero__headline {
+        font-size: clamp(2rem, 8vw, 2.75rem);
+      }
+
+      .story-hero__scroll-hint {
+        bottom: 50px;
+      }
+
+      .story-intro {
+        padding-top: 56px;
+      }
+
+      .story-intro p,
+      .story-body p {
+        font-size: 18px;
+        line-height: 1.75;
+      }
+
+      .story-breakout {
+        margin: 56px 0;
+      }
+
+      .story-breakout__img {
+        height: 65vw;
+      }
+
+      .story-pullquote {
+        margin: 56px auto;
+        padding-left: 20px;
+      }
+
+      .story-pullquote blockquote p {
+        font-size: 1.375rem;
+      }
+
+      .story-steps {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .story-step {
+        padding: 28px 24px 24px;
+      }
+
+      .story-data-cards {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        margin: 56px auto;
+      }
+
+      .story-data-card {
+        padding: 28px 20px 24px;
+      }
+
+      .story-related__grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .story-related {
+        padding-bottom: 64px;
+      }
+
+      .story-divider {
+        margin: 56px auto;
+      }
+
+      .story-footer-cta {
+        padding: 48px 24px;
+      }
+    }
+
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .story-steps {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+      }
+
+      .story-step {
+        padding: 28px 20px 24px;
+      }
+
+      .story-step p {
+        font-size: 0.875rem;
+      }
+    }
+
+    /* =========================================
+       PRINT STYLES
+       ========================================= */
+    @media print {
+      .site-header,
+      .nav-overlay,
+      .story-hero__scroll-hint,
+      .story-footer-cta {
+        display: none !important;
+      }
+
+      .story-page {
+        font-size: 12pt;
+        line-height: 1.6;
+        color: #000;
+        background: #fff;
+      }
+
+      .story-hero {
+        height: auto;
+        min-height: 0;
+        page-break-after: always;
+      }
+
+      .story-hero__img {
+        position: relative;
+        height: 300px;
+      }
+
+      .story-hero__overlay {
+        display: none;
+      }
+
+      .story-hero__content {
+        position: relative;
+        color: #000;
+        padding: 24px 0;
+      }
+
+      .story-breakout {
+        width: 100%;
+        left: 0;
+        transform: none;
+      }
+
+      .story-breakout__img {
+        height: auto;
+        max-height: 300px;
+      }
+
+      .story-steps,
+      .story-data-cards,
+      .story-related__grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+
+      a[href]::after {
+        content: " (" attr(href) ")";
+        font-size: 0.75em;
+        color: #666;
+      }
+
+      .nav-logo::after,
+      .nav-menu a::after,
+      .story-related-card__arrow::after {
+        content: none !important;
+      }
+    }
+  </style>
+</head>
+<body class="story-page">
+
+  <a href="#story-content" class="skip-link">Skip to main content</a>
+
+  <!-- Header — shared nav from styles.css -->
+  <header class="site-header">
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="../index.html" class="nav-logo" aria-label="CHAMP home">CH<span>A</span>MP</a>
+      <button class="nav-hamburger" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle navigation menu">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-menu" id="nav-menu" role="menubar">
+        <a href="../index.html" role="menuitem">Home</a>
+        <a href="../index.html#map-section" role="menuitem">Map</a>
+        <a href="../resources.html" role="menuitem">Resources</a>
+        <a href="../events.html" role="menuitem">Events</a>
+        <a href="../news.html" role="menuitem">News</a>
+        <a href="../about.html" role="menuitem">About</a>
+        <a href="../about.html#join" class="nav-cta" role="menuitem">Join CHAMP</a>
+      </div>
+    </nav>
+    <div class="nav-overlay"></div>
+  </header>
+
+  <main id="story-content">
+
+    <!-- ============ HERO ============ -->
+    <section class="story-hero" aria-label="Story hero">
+      <img
+        class="story-hero__img"
+        src="https://images.unsplash.com/photo-1553603227-2358aabe821e?w=1920&q=80"
+        alt="The blue-washed buildings of Chefchaouen, Morocco, cascading down a hillside"
+        loading="eager"
+      >
+      <div class="story-hero__overlay" aria-hidden="true"></div>
+      <div class="story-hero__content">
+        <p class="story-hero__eyebrow">CHAMP Country Story</p>
+        <h1 class="story-hero__headline">How Morocco Connects Cities to National Climate Goals</h1>
+        <p class="story-hero__subline">From Chefchaouen to Rabat — multilevel partnerships in action</p>
+      </div>
+      <div class="story-hero__scroll-hint" aria-hidden="true">
+        <span>Scroll</span>
+        <div class="story-hero__scroll-line"></div>
+      </div>
+    </section>
+
+    <!-- ============ INTRO ============ -->
+    <section class="story-intro" aria-label="Introduction">
+      <p class="reveal">When Morocco endorsed CHAMP at COP28 in December 2023, the commitment carried weight. The country was already navigating one of the most ambitious energy transitions in North Africa — a national target to cut emissions by 45.5% by 2030. But national targets mean little without local implementation. Morocco's challenge was connecting its cities to its climate plans.</p>
+      <p class="reveal">That connection is now happening. In June 2025, over 100 leaders from national and local governments, international agencies, and civil society gathered in Rabat for the UrbanShift Morocco Multilevel Governance Dialogue. The question on the table: how can Morocco transform its resources, waste, and energy into engines of resilient growth?</p>
+    </section>
+
+    <!-- ============ FULL-WIDTH IMAGE BREAK ============ -->
+    <figure class="story-breakout reveal" role="img" aria-label="Morocco landscape">
+      <img
+        class="story-breakout__img"
+        src="https://images.unsplash.com/photo-1489749798305-4fea3ae63d43?w=1920&q=80"
+        alt="Panoramic view of a Moroccan city with traditional architecture under warm sunlight"
+        loading="lazy"
+      >
+      <figcaption class="story-breakout__caption">Morocco's cities are at the center of its climate transition. Photo: Unsplash</figcaption>
+    </figure>
+
+    <!-- ============ THE LOCAL PUSH ============ -->
+    <div class="story-section-header reveal">
+      <hr class="story-section-header__rule">
+      <h2>The Local Push</h2>
+    </div>
+
+    <div class="story-body">
+      <p class="reveal">"The circular economy is not only an environmental imperative — it is an opportunity for inclusive and sustainable economic transformation." That was the message from Minister Leila Benali, Morocco's Minister of Energy Transition and Sustainable Development, as she opened the Rabat dialogue.</p>
+      <p class="reveal">In Chefchaouen, a city of 45,000 known worldwide for its blue-washed streets, the municipal council had already committed to local climate action. But without structured alignment to national targets, local efforts risked fragmentation. The CHAMP framework changed that — creating a formal consultation channel between cities and the national government's NDC process.</p>
+    </div>
+
+    <!-- ============ PULL QUOTE ============ -->
+    <aside class="story-pullquote reveal" aria-label="Pull quote">
+      <blockquote>
+        <p>"True change requires systemic innovation — rethinking how resources are used, shared, and valued."</p>
+        <cite>— Paul Currie, ICLEI Africa, at the Rabat Dialogue</cite>
+      </blockquote>
+    </aside>
+
+    <!-- ============ DIVIDER ============ -->
+    <div class="story-divider" aria-hidden="true"><hr></div>
+
+    <!-- ============ THREE STEPS IN PRACTICE ============ -->
+    <div class="story-section-header reveal">
+      <hr class="story-section-header__rule">
+      <h2>Three Steps in Practice</h2>
+    </div>
+
+    <div class="story-steps reveal-stagger">
+      <article class="story-step reveal">
+        <div class="story-step__number">01</div>
+        <h3 class="story-step__title">Consult</h3>
+        <p>Morocco's Ministry of Energy Transition held regional consultations with municipal councils across the country, integrating local perspectives into the national NDC update. The UrbanShift Dialogue in Rabat was a direct product of this process.</p>
+      </article>
+      <article class="story-step reveal">
+        <div class="story-step__number">02</div>
+        <h3 class="story-step__title">Collaborate</h3>
+        <p>For the first time, city-level data on waste, water, and energy was being collected to inform national reporting. International partners including UNDP, UNIDO, and ICLEI provided technical support.</p>
+      </article>
+      <article class="story-step reveal">
+        <div class="story-step__number">03</div>
+        <h3 class="story-step__title">Implement</h3>
+        <p>The dialogue's findings will feed directly into Morocco's circular economy roadmap, with a follow-up national dialogue scheduled to examine how recommendations have been integrated into local implementation.</p>
+      </article>
+    </div>
+
+    <!-- ============ DATA CALLOUT CARDS ============ -->
+    <div class="story-data-cards reveal-stagger" aria-label="Key statistics">
+      <div class="story-data-card reveal">
+        <div class="story-data-card__number">45.5%</div>
+        <p class="story-data-card__label">Emission reduction target in Morocco's NDC by 2030</p>
+      </div>
+      <div class="story-data-card reveal">
+        <div class="story-data-card__number">$208M</div>
+        <p class="story-data-card__label">Climate finance pipeline through CHAMP-supported process</p>
+      </div>
+      <div class="story-data-card reveal">
+        <div class="story-data-card__number">100+</div>
+        <p class="story-data-card__label">Leaders at the Rabat Multilevel Governance Dialogue</p>
+      </div>
+    </div>
+
+    <!-- ============ DIVIDER ============ -->
+    <div class="story-divider" aria-hidden="true"><hr></div>
+
+    <!-- ============ WHAT THIS MEANS FOR CHAMP ============ -->
+    <div class="story-section-header reveal">
+      <hr class="story-section-header__rule">
+      <h2>What This Means for CHAMP</h2>
+    </div>
+
+    <div class="story-body">
+      <p class="reveal">Morocco's experience is exactly what CHAMP was designed to produce: a national government that doesn't just set climate targets, but builds the multilevel infrastructure to deliver them. When Chefchaouen's waste management plans align with Rabat's national strategy, climate action stops being a document and starts being a system.</p>
+      <p class="reveal">As CHAMP grows beyond 78 endorsers heading into COP31, stories like Morocco's become the evidence base for the coalition's core argument — that national climate plans work better when cities help write them.</p>
+    </div>
+
+    <!-- ============ DIVIDER ============ -->
+    <div class="story-divider" aria-hidden="true"><hr></div>
+
+    <!-- ============ RELATED CONTENT ============ -->
+    <section class="story-related reveal" aria-label="Related reading">
+      <div class="story-related__header">
+        <h2>Continue Reading</h2>
+      </div>
+      <div class="story-related__grid reveal-stagger">
+        <a href="https://www.shiftcities.org/post/local-leadership-paves-way-sustainable-change-morocco" class="story-related-card reveal" target="_blank" rel="noopener noreferrer">
+          <div class="story-related-card__source">UrbanShift</div>
+          <h3 class="story-related-card__title">Local Leadership Paves the Way for Sustainable Change in Morocco</h3>
+          <div class="story-related-card__arrow">
+            Read article
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+              <path d="M1 7h11M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </a>
+        <a href="https://ndcpartnership.org/news/climate-finance-motion-morocco-builds-pipeline-high-impact-projects-worth-usd-208-million" class="story-related-card reveal" target="_blank" rel="noopener noreferrer">
+          <div class="story-related-card__source">NDC Partnership</div>
+          <h3 class="story-related-card__title">Morocco Climate Finance: Building a Pipeline of High-Impact Projects</h3>
+          <div class="story-related-card__arrow">
+            Read article
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+              <path d="M1 7h11M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </a>
+        <a href="#" class="story-related-card reveal">
+          <div class="story-related-card__source">WRI Guide</div>
+          <h3 class="story-related-card__title">Stronger NDCs with Cities, States, and Regions</h3>
+          <div class="story-related-card__arrow">
+            Read guide
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+              <path d="M1 7h11M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ FOOTER CTA BAND ============ -->
+  <footer class="story-footer-cta">
+    <div class="story-footer-cta__inner">
+      <a href="../index.html#map-section" class="story-footer-cta__primary">Explore all CHAMP endorsers &rarr;</a>
+      <a href="#" class="story-footer-cta__secondary">Read more Country Stories &rarr;</a>
+    </div>
+  </footer>
+
+  <!-- Shared nav JS -->
+  <script src="../js/nav.js"></script>
+
+  <!-- Scroll reveal (self-contained) -->
+  <script>
+    (function() {
+      'use strict';
+
+      if (!('IntersectionObserver' in window)) {
+        // Fallback: show everything if IntersectionObserver is unsupported
+        document.querySelectorAll('.reveal').forEach(function(el) {
+          el.classList.add('is-revealed');
+        });
+        return;
+      }
+
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-revealed');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -40px 0px'
+      });
+
+      document.querySelectorAll('.reveal').forEach(function(el) {
+        observer.observe(el);
+      });
+    })();
+  </script>
+
+</body>
+</html>
