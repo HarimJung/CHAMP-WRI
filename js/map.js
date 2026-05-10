@@ -347,6 +347,18 @@
       commitList.appendChild(li);
     });
 
+    // Country story link
+    var storySection = document.getElementById('sidebar-story');
+    if (storySection) {
+      if (endorser.storyUrl) {
+        storySection.style.display = '';
+        var storyLink = storySection.querySelector('a');
+        if (storyLink) storyLink.href = endorser.storyUrl;
+      } else {
+        storySection.style.display = 'none';
+      }
+    }
+
     // Related resources
     var relatedResources = document.getElementById('sidebar-resources');
     relatedResources.innerHTML = '';

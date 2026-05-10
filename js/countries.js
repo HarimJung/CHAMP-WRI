@@ -51,7 +51,7 @@ const champEndorsers = [
   { name: "Mexico", iso2: "MX", iso3: "MEX", isoNumeric: "484", region: "Latin America", status: "Endorsed", joinedYear: 2023, capital_lat: 19.43, capital_lng: -99.13 },
   { name: "Moldova", iso2: "MD", iso3: "MDA", isoNumeric: "498", region: "Europe", status: "Endorsed", joinedYear: 2023, capital_lat: 47.01, capital_lng: 28.86 },
   { name: "Mongolia", iso2: "MN", iso3: "MNG", isoNumeric: "496", region: "Asia-Pacific", status: "Endorsed", joinedYear: 2023, capital_lat: 47.91, capital_lng: 106.91 },
-  { name: "Morocco", iso2: "MA", iso3: "MAR", isoNumeric: "504", region: "Africa", status: "Endorsed", joinedYear: 2023, capital_lat: 34.02, capital_lng: -6.84 },
+  { name: "Morocco", iso2: "MA", iso3: "MAR", isoNumeric: "504", region: "Africa", status: "Endorsed", joinedYear: 2023, capital_lat: 34.02, capital_lng: -6.84, storyUrl: "story/morocco.html" },
   { name: "Netherlands", iso2: "NL", iso3: "NLD", isoNumeric: "528", region: "Europe", status: "Endorsed", joinedYear: 2023, capital_lat: 52.37, capital_lng: 4.90 },
   { name: "Nicaragua", iso2: "NI", iso3: "NIC", isoNumeric: "558", region: "Latin America", status: "Endorsed", joinedYear: 2023, capital_lat: 12.15, capital_lng: -86.27 },
   { name: "Nigeria", iso2: "NG", iso3: "NGA", isoNumeric: "566", region: "Africa", status: "Endorsed", joinedYear: 2023, capital_lat: 9.06, capital_lng: 7.49 },

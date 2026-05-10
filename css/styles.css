@@ -1104,6 +1104,40 @@ h4 {
   color: var(--dark-green);
 }
 
+.sidebar-story-link {
+  display: block;
+  background: rgba(32,123,106,0.08);
+  border: 1px solid rgba(32,123,106,0.15);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  text-decoration: none;
+  transition: background var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.sidebar-story-link:hover {
+  background: rgba(32,123,106,0.14);
+  border-color: rgba(32,123,106,0.3);
+  transform: translateY(-1px);
+}
+
+.sidebar-story-eyebrow {
+  display: block;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 4px;
+}
+
+.sidebar-story-title {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--white);
+}
+
 /* ================================================
    WHAT IS CHAMP (Dark Section)
    ================================================ */
